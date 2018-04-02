@@ -34,7 +34,10 @@ namespace LibraryManagementSystem
             frmNewMember frm = new frmNewMember();
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
+            {
                 loadMembers();
+                fillCboMembers();
+            }
         }
         private void btnViewAll_Click(object sender, EventArgs e)
         {
@@ -54,20 +57,37 @@ namespace LibraryManagementSystem
         }
         private void btnUpdateMember_Click(object sender, EventArgs e)
         {
-            frmUpdateMember frm = new frmUpdateMember();
-            frm.mID = Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString());
-            frm.ShowDialog();
-            if(frm.DialogResult == DialogResult.OK)
-                loadMembers();
+            DataSet ds = new DataSet();
+            ds = bt.getBorrowedCount(Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString()));
+            if (Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString()) == 0)
+            {
+                frmUpdateMember frm = new frmUpdateMember();
+                frm.mID = Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString());
+                frm.ShowDialog();
+                if (frm.DialogResult == DialogResult.OK)
+                {
+                    loadMembers();
+                    fillCboMembers();
+                }
+            }
+            else
+                MessageBox.Show("User still has pending unreturned book(s)!", "Can't Update User", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void btnDeleteMember_Click(object sender, EventArgs e)
         {
             DialogResult ok = MessageBox.Show("Are you sure to delete?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             if(ok == DialogResult.OK)
             {
-                mm.deleteMember(Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString()));
-                loadMembers();
-                MessageBox.Show("Member records has been deleted", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                DataSet ds = new DataSet();
+                ds = bt.getBorrowedCount(Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString()));
+                if (Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString()) == 0)
+                {
+                    mm.deleteMember(Convert.ToInt32(dgvMembers.SelectedRows[0].Cells[0].Value.ToString()));
+                    loadMembers();
+                    MessageBox.Show("Member records has been deleted", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                    MessageBox.Show("Member still has pending unreturned book(s)!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void loadBooks()
@@ -107,7 +127,8 @@ namespace LibraryManagementSystem
         private void fillCboMembers()
         {
             DataSet ds = new DataSet();
-            ds = mm.loadNames();
+            DateTime curDate = DateTime.Today;
+            ds = mm.loadNames(curDate.ToString("yyyy/MM/dd"));
             cboMember.DataSource = ds.Tables[0];
             cboMember.DisplayMember = "Fullname";
             cboMember.SelectedIndex = -1;
@@ -120,7 +141,6 @@ namespace LibraryManagementSystem
             cboBook.DisplayMember = "Title";
             cboBook.SelectedIndex = -1;
         }
-
         private void btnIssue_Click(object sender, EventArgs e)
         {
             bt.borrowBook(bid, mid, dtpIssueDate.Value.ToString("yyyy/MM/dd"), dtpDueDate.Value.ToString("yyyy/MM/dd"));
@@ -135,46 +155,35 @@ namespace LibraryManagementSystem
             grpBoxIssue.Visible = true;
             dtpDueDate.Text = DateTime.Today.AddDays(7).ToString("yyyy/MM/dd");
         }
-
         private void cboBook_SelectionChangeCommitted(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
             ds = bm.loadBooks(cboBook.GetItemText(cboBook.SelectedItem));
             bid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
-
             if (cboMember.SelectedIndex != -1 && cboBook.SelectedIndex != -1)
                 btnOK.Enabled = true;
         }
-
         private void cboMember_SelectionChangeCommitted(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
             ds = mm.loadMembers(cboMember.GetItemText(cboMember.SelectedItem));
             mid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
-
             loadBorrowedList();
-
             if (cboMember.SelectedIndex != -1 && cboBook.SelectedIndex != -1)
                 btnOK.Enabled = true;
         }
-
         private void dgvBorrowed_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataSet ds = new DataSet();
             ds = mm.loadMembers(dgvBorrowed.SelectedRows[0].Cells[0].Value.ToString());
             mid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
-
             ds = bm.loadBooks(dgvBorrowed.SelectedRows[0].Cells[1].Value.ToString());
             bid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
-
             grpBoxReturn.Visible = true;
-
             ds = bt.loadBorrowedBookInfo(bid, mid);
             dtpIssue.Text = ds.Tables[0].Rows[0].ItemArray[3].ToString();
             dtpDue.Text = ds.Tables[0].Rows[0].ItemArray[4].ToString();
-
         }
-
         private void btnReturn_Click(object sender, EventArgs e)
         {
             bt.returnBook(bid, mid, dtpReturn.Value.ToString("yyyy/MM/dd"));
@@ -184,38 +193,26 @@ namespace LibraryManagementSystem
             MessageBox.Show("Book has been returned", "Returned", MessageBoxButtons.OK, MessageBoxIcon.Information);
             grpBoxReturn.Visible = false;
         }
-
         private void btnBorrowedBooks_Click(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
             ds = bt.loadBorrowedList();
             dgvBorrowed.DataSource = ds.Tables[0];
         }
-
         private void loadBorrowedList()
         {
             DataSet ds = new DataSet();
             ds = bt.loadBorrowedList(mid);
             dgvBorrowed.DataSource = ds.Tables[0];
         }
-
         private void cboPublisher_SelectionChangeCommitted(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
             ds = pt.loadBooks(cboPublisher.GetItemText(cboPublisher.SelectedItem));
             dgvSupplierBooks.DataSource = ds.Tables[0];
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DataSet ds = new DataSet();
-            ds = pt.loadBooks("");
-            dgvSupplierBooks.DataSource = ds.Tables[0];
-        }
-
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            
             int id = Convert.ToInt32(dgvSupplierBooks.SelectedRows[0].Cells[0].Value.ToString());
             string title = dgvSupplierBooks.SelectedRows[0].Cells[3].Value.ToString();
             string author = dgvSupplierBooks.SelectedRows[0].Cells[4].Value.ToString();
@@ -224,13 +221,17 @@ namespace LibraryManagementSystem
             loadBooks();
             tabLibrary.SelectedTab = tabBooks;
         }
-
+        private void btnViewPubBooks_Click(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds = pt.loadBooks("");
+            dgvSupplierBooks.DataSource = ds.Tables[0];
+        }
         private void loadPublisher()
         {
             DataSet ds = new DataSet();
             ds = pt.loadBooks("");
             dgvSupplierBooks.DataSource = ds.Tables[0];
-
             ds = pt.loadPublishers();
             cboPublisher.DataSource = ds.Tables[0];
             cboPublisher.DisplayMember = "publishername";

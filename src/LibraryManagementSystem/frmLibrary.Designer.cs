@@ -66,8 +66,6 @@
             this.Book = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BorrowedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpBoxReturn = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.dtpReturn = new System.Windows.Forms.DateTimePicker();
             this.lblReturn = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -91,17 +89,16 @@
             this.tabSupply = new System.Windows.Forms.TabPage();
             this.grpBoxAvail = new System.Windows.Forms.GroupBox();
             this.dgvSupplierBooks = new System.Windows.Forms.DataGridView();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cboPublisher = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnRequest = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PBookID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pubID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Publisher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnViewPubBooks = new System.Windows.Forms.Button();
+            this.cboPublisher = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnRequest = new System.Windows.Forms.Button();
             this.tabLibrary.SuspendLayout();
             this.tabMembers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
@@ -477,8 +474,6 @@
             // 
             // grpBoxReturn
             // 
-            this.grpBoxReturn.Controls.Add(this.textBox2);
-            this.grpBoxReturn.Controls.Add(this.label4);
             this.grpBoxReturn.Controls.Add(this.dtpReturn);
             this.grpBoxReturn.Controls.Add(this.lblReturn);
             this.grpBoxReturn.Controls.Add(this.btnReturn);
@@ -494,26 +489,10 @@
             this.grpBoxReturn.Text = "Return Book";
             this.grpBoxReturn.Visible = false;
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(312, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(133, 20);
-            this.textBox2.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(248, 82);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Fine:";
-            // 
             // dtpReturn
             // 
             this.dtpReturn.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReturn.Location = new System.Drawing.Point(83, 76);
+            this.dtpReturn.Location = new System.Drawing.Point(223, 77);
             this.dtpReturn.Name = "dtpReturn";
             this.dtpReturn.Size = new System.Drawing.Size(133, 20);
             this.dtpReturn.TabIndex = 8;
@@ -521,7 +500,7 @@
             // lblReturn
             // 
             this.lblReturn.AutoSize = true;
-            this.lblReturn.Location = new System.Drawing.Point(16, 82);
+            this.lblReturn.Location = new System.Drawing.Point(156, 83);
             this.lblReturn.Name = "lblReturn";
             this.lblReturn.Size = new System.Drawing.Size(68, 13);
             this.lblReturn.TabIndex = 7;
@@ -742,55 +721,6 @@
             this.dgvSupplierBooks.Size = new System.Drawing.Size(827, 256);
             this.dgvSupplierBooks.TabIndex = 5;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button1);
-            this.groupBox5.Controls.Add(this.cboPublisher);
-            this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.btnRequest);
-            this.groupBox5.Location = new System.Drawing.Point(7, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(839, 57);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            // 
-            // cboPublisher
-            // 
-            this.cboPublisher.FormattingEnabled = true;
-            this.cboPublisher.Location = new System.Drawing.Point(64, 19);
-            this.cboPublisher.Name = "cboPublisher";
-            this.cboPublisher.Size = new System.Drawing.Size(218, 21);
-            this.cboPublisher.TabIndex = 5;
-            this.cboPublisher.SelectionChangeCommitted += new System.EventHandler(this.cboPublisher_SelectionChangeCommitted);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Publisher:";
-            // 
-            // btnRequest
-            // 
-            this.btnRequest.Location = new System.Drawing.Point(288, 11);
-            this.btnRequest.Name = "btnRequest";
-            this.btnRequest.Size = new System.Drawing.Size(103, 35);
-            this.btnRequest.TabIndex = 0;
-            this.btnRequest.Text = "Request Book";
-            this.btnRequest.UseVisualStyleBackColor = true;
-            this.btnRequest.Click += new System.EventHandler(this.btnRequest_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(1241, 566);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
             // PBookID
             // 
             this.PBookID.DataPropertyName = "bookID";
@@ -827,15 +757,55 @@
             this.Publisher.Name = "Publisher";
             this.Publisher.ReadOnly = true;
             // 
-            // button1
+            // groupBox5
             // 
-            this.button1.Location = new System.Drawing.Point(397, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 35);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "View All Available Books";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox5.Controls.Add(this.btnViewPubBooks);
+            this.groupBox5.Controls.Add(this.cboPublisher);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.btnRequest);
+            this.groupBox5.Location = new System.Drawing.Point(7, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(839, 57);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            // 
+            // btnViewPubBooks
+            // 
+            this.btnViewPubBooks.Location = new System.Drawing.Point(397, 11);
+            this.btnViewPubBooks.Name = "btnViewPubBooks";
+            this.btnViewPubBooks.Size = new System.Drawing.Size(139, 35);
+            this.btnViewPubBooks.TabIndex = 4;
+            this.btnViewPubBooks.Text = "View All Available Books";
+            this.btnViewPubBooks.UseVisualStyleBackColor = true;
+            this.btnViewPubBooks.Click += new System.EventHandler(this.btnViewPubBooks_Click);
+            // 
+            // cboPublisher
+            // 
+            this.cboPublisher.FormattingEnabled = true;
+            this.cboPublisher.Location = new System.Drawing.Point(64, 19);
+            this.cboPublisher.Name = "cboPublisher";
+            this.cboPublisher.Size = new System.Drawing.Size(218, 21);
+            this.cboPublisher.TabIndex = 5;
+            this.cboPublisher.SelectionChangeCommitted += new System.EventHandler(this.cboPublisher_SelectionChangeCommitted);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Publisher:";
+            // 
+            // btnRequest
+            // 
+            this.btnRequest.Location = new System.Drawing.Point(288, 11);
+            this.btnRequest.Name = "btnRequest";
+            this.btnRequest.Size = new System.Drawing.Size(103, 35);
+            this.btnRequest.TabIndex = 0;
+            this.btnRequest.Text = "Request Book";
+            this.btnRequest.UseVisualStyleBackColor = true;
+            this.btnRequest.Click += new System.EventHandler(this.btnRequest_Click);
             // 
             // frmLibrary
             // 
@@ -843,10 +813,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(884, 461);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabLibrary);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmLibrary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Library Management System";
@@ -895,7 +865,6 @@
         private System.Windows.Forms.TabPage tabBooks;
         private System.Windows.Forms.TabPage tabBookTransactions;
         private System.Windows.Forms.TabPage tabSupply;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox grpBoxBookControls;
         private System.Windows.Forms.Button btnRequestBook;
         private System.Windows.Forms.Button btnDeleteBook;
@@ -926,8 +895,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtpReturn;
         private System.Windows.Forms.Label lblReturn;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox grpBoxAvail;
         private System.Windows.Forms.DataGridView dgvSupplierBooks;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -953,7 +920,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn PAuthor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Publisher;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnViewPubBooks;
     }
 }
 

@@ -144,7 +144,9 @@
             this.Controls.Add(this.lblLastname);
             this.Controls.Add(this.lblFirstname);
             this.Controls.Add(this.lblAddNewMember);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmNewMember";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add New Member";

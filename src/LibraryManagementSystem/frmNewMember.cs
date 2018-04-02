@@ -21,7 +21,10 @@ namespace LibraryManagementSystem
         private void btnAdd_Click(object sender, EventArgs e)
         {
             DateTime exp = dtpMemDate.Value;
-            exp = exp.AddYears(1);
+            if (cboType.Text == "Regular Member")
+                exp = exp.AddMonths(3);
+            else if(cboType.Text == "Premium Member")
+                exp = exp.AddYears(1);
             mm.addMember(txtBoxFname.Text, txtBoxLname.Text, dtpMemDate.Value.ToString("yyyy/MM/dd"), exp.ToString("yyyy/MM/dd"), cboType.GetItemText(cboType.SelectedItem));
             MessageBox.Show("Member Information Added", "Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;

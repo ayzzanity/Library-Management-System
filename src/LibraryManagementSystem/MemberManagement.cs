@@ -22,9 +22,9 @@ namespace LibraryManagementSystem
         {
             return db.load("SELECT * FROM members WHERE CONCAT(firstname,' ',lastname) LIKE '" + sql + "%' OR CONCAT(lastname,' ',firstname) LIKE '" + sql + "%' ");
         }
-        public DataSet loadNames()
+        public DataSet loadNames(string date)
         {
-            return db.load("SELECT CONCAT(firstname,' ',lastname) AS Fullname FROM members ORDER BY Fullname ASC");
+            return db.load("SELECT CONCAT(firstname,' ',lastname) AS Fullname FROM members WHERE expirydate >= '"+date+"' ORDER BY Fullname ASC");
         }
         public void addMember(string firstname, string lastname, string memdate, string expdate, string memtype)
         {

@@ -28,5 +28,9 @@ namespace LibraryManagementSystem
             db.executeSql("UPDATE borrowers SET returndate = '" + rDate + "' WHERE bookID = '" + bookID + "' AND memberID = '" + memberID + "' ");
             db.executeSql("UPDATE books SET status = 'Available' WHERE bookID = '" + bookID + "' ");
         }
+        public DataSet getBorrowedCount(int memberID)
+        {
+            return db.load("SELECT COUNT(bookID) FROM borrowers WHERE memberID = '" + memberID + "' AND returndate is NULL");
+        }
     }
 }

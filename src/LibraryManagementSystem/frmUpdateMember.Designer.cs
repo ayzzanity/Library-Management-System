@@ -120,6 +120,7 @@
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(258, 21);
             this.cboType.TabIndex = 8;
+            this.cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_SelectedIndexChanged);
             // 
             // btnUpdate
             // 
@@ -164,7 +165,9 @@
             this.Controls.Add(this.lblLastname);
             this.Controls.Add(this.lblFirstname);
             this.Controls.Add(this.lblAddNewMember);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmUpdateMember";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update Member";

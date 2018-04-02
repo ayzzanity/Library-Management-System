@@ -37,5 +37,15 @@ namespace LibraryManagementSystem
             dtpExpiry.Text = ds.Tables[0].Rows[0].ItemArray[4].ToString();
             cboType.Text = ds.Tables[0].Rows[0].ItemArray[5].ToString();           
         }
+        private void cboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DateTime exp = dtpMemDate.Value;
+            if (cboType.Text == "Regular Member")
+                exp = exp.AddMonths(3);
+            else if (cboType.Text == "Premium Member")
+                exp = exp.AddYears(1);
+
+            dtpExpiry.Text = exp.ToString();
+        }
     }
 }
