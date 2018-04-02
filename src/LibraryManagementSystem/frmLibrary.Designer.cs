@@ -43,6 +43,7 @@
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.grpBoxMemberControls = new System.Windows.Forms.GroupBox();
+            this.btnIssueMember = new System.Windows.Forms.Button();
             this.btnDeleteMember = new System.Windows.Forms.Button();
             this.btnUpdateMember = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             this.txtBoxBookSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.grpBoxBookControls = new System.Windows.Forms.GroupBox();
+            this.btnIssueBook = new System.Windows.Forms.Button();
             this.btnRequestBook = new System.Windows.Forms.Button();
             this.btnDeleteBook = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
@@ -245,6 +247,7 @@
             // 
             // grpBoxMemberControls
             // 
+            this.grpBoxMemberControls.Controls.Add(this.btnIssueMember);
             this.grpBoxMemberControls.Controls.Add(this.btnDeleteMember);
             this.grpBoxMemberControls.Controls.Add(this.btnUpdateMember);
             this.grpBoxMemberControls.Controls.Add(this.btnRegister);
@@ -253,6 +256,16 @@
             this.grpBoxMemberControls.Size = new System.Drawing.Size(839, 57);
             this.grpBoxMemberControls.TabIndex = 0;
             this.grpBoxMemberControls.TabStop = false;
+            // 
+            // btnIssueMember
+            // 
+            this.btnIssueMember.Location = new System.Drawing.Point(733, 13);
+            this.btnIssueMember.Name = "btnIssueMember";
+            this.btnIssueMember.Size = new System.Drawing.Size(100, 35);
+            this.btnIssueMember.TabIndex = 3;
+            this.btnIssueMember.Text = "Issue Book";
+            this.btnIssueMember.UseVisualStyleBackColor = true;
+            this.btnIssueMember.Click += new System.EventHandler(this.btnIssueMember_Click);
             // 
             // btnDeleteMember
             // 
@@ -381,6 +394,7 @@
             // 
             // grpBoxBookControls
             // 
+            this.grpBoxBookControls.Controls.Add(this.btnIssueBook);
             this.grpBoxBookControls.Controls.Add(this.btnRequestBook);
             this.grpBoxBookControls.Controls.Add(this.btnDeleteBook);
             this.grpBoxBookControls.Controls.Add(this.btnAddBook);
@@ -389,6 +403,16 @@
             this.grpBoxBookControls.Size = new System.Drawing.Size(839, 57);
             this.grpBoxBookControls.TabIndex = 2;
             this.grpBoxBookControls.TabStop = false;
+            // 
+            // btnIssueBook
+            // 
+            this.btnIssueBook.Location = new System.Drawing.Point(733, 13);
+            this.btnIssueBook.Name = "btnIssueBook";
+            this.btnIssueBook.Size = new System.Drawing.Size(100, 35);
+            this.btnIssueBook.TabIndex = 3;
+            this.btnIssueBook.Text = "Issue to Member";
+            this.btnIssueBook.UseVisualStyleBackColor = true;
+            this.btnIssueBook.Click += new System.EventHandler(this.btnIssueBook_Click);
             // 
             // btnRequestBook
             // 
@@ -921,6 +945,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PAuthor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Publisher;
         private System.Windows.Forms.Button btnViewPubBooks;
+        private System.Windows.Forms.Button btnIssueMember;
+        private System.Windows.Forms.Button btnIssueBook;
     }
 }
 

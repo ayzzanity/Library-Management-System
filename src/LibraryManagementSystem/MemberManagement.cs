@@ -12,7 +12,7 @@ namespace LibraryManagementSystem
         DBTransactions db = new DBTransactions();
         public DataSet loadMembers()
         {
-            return db.load("SELECT * FROM members");
+            return db.load("SELECT * FROM members ORDER BY firstname ASC");
         }
         public DataSet loadMembers(int id)
         {

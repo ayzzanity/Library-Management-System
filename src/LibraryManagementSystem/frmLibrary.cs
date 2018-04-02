@@ -101,7 +101,10 @@ namespace LibraryManagementSystem
             frmAddBook frm = new frmAddBook();
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
+            {
                 loadBooks();
+                fillCboBooks();
+            }
         }
         private void btnDeleteBook_Click(object sender, EventArgs e)
         {
@@ -154,6 +157,7 @@ namespace LibraryManagementSystem
         {
             grpBoxIssue.Visible = true;
             dtpDueDate.Text = DateTime.Today.AddDays(7).ToString("yyyy/MM/dd");
+            btnOK.Enabled = false;
         }
         private void cboBook_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -227,6 +231,33 @@ namespace LibraryManagementSystem
             ds = pt.loadBooks("");
             dgvSupplierBooks.DataSource = ds.Tables[0];
         }
+
+        private void btnIssueMember_Click(object sender, EventArgs e)
+        {
+            cboMember.SelectedIndex = dgvMembers.CurrentCell.RowIndex;
+            DataSet ds = new DataSet();
+            ds = mm.loadMembers(cboMember.GetItemText(cboMember.SelectedItem));
+            mid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
+            tabLibrary.SelectedTab = tabBookTransactions;
+            loadBorrowedList();
+        }
+
+        private void btnIssueBook_Click(object sender, EventArgs e)
+        {
+            if (dgvBooks.SelectedRows[0].Cells[3].Value.ToString() == "Available")
+            {
+                cboBook.SelectedIndex = dgvBooks.CurrentCell.RowIndex;
+                DataSet ds = new DataSet();
+                ds = bm.loadBooks(cboBook.GetItemText(cboBook.SelectedItem));
+                bid = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0].ToString());
+                tabLibrary.SelectedTab = tabBookTransactions;
+            }
+            else
+            {
+                MessageBox.Show("Book is not available", "Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
         private void loadPublisher()
         {
             DataSet ds = new DataSet();
